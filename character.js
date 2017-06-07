@@ -1,0 +1,42 @@
+let _ = require('lodash')
+let getName = require('./namer.js')
+let dice = require('./dice.js')
+let jobs = require('./jobs.js')
+
+function getCharacter(gender, lastName) {
+    var character = {}
+
+    if (gender === undefined) {
+        character.gender = _.sample(["male", "female"])
+    } else {
+        character.gender = gender
+    }
+
+    character.name = getName(character.gender, lastName)
+
+    function mod(ability) {
+        let mod = Math.floor((ability - 10) / 2)
+        return mod
+    }
+
+    character.job = jobs.getJob()
+
+    character.strength = dice.ability()
+    character.dexterity = dice.ability()
+    character.constitution = dice.ability()
+    character.intelligence = dice.ability()
+    character.wisdom = dice.ability()
+    character.charisma = dice.ability()
+    character.strMod = mod(character.strength)
+    character.dexMod = mod(character.dexterity)
+    character.conMod = mod(character.constitution)
+    character.intMod = mod(character.intelligence)
+    character.wisMod = mod(character.wisdom)
+    character.chaMod = mod(character.charisma)
+    character.hp = dice.d8() + character.conMod
+    //character.weapon = _.sample(weapons)
+
+    return character
+}
+
+module.exports = getCharacter
