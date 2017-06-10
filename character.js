@@ -4,7 +4,7 @@ let dice = require('./dice.js')
 let jobs = require('./jobs.js')
 
 function getCharacter(gender, lastName) {
-    var character = {}
+    let character = {}
 
     if (gender === undefined) {
         character.gender = _.sample(["male", "female"])
@@ -12,7 +12,9 @@ function getCharacter(gender, lastName) {
         character.gender = gender
     }
 
-    character.name = getName(character.gender, lastName)
+    let fullname = getName(character.gender, lastName)
+
+    character.fullname = fullname
 
     function mod(ability) {
         let mod = Math.floor((ability - 10) / 2)

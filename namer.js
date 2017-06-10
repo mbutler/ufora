@@ -21174,9 +21174,9 @@ let job = [
 "Entertainer"
 ]
 
-var name = {}
-
 function getName(gender, lastName) {
+	let name = {}
+
     if (gender === "male") {
         name.first = _.sample(male)
     } else if (gender === "female") {

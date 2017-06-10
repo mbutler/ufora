@@ -3,29 +3,23 @@ let character = require('./character.js')
 
 let family = []
 
-let grandfather = character("male")
-grandfather.numberOfKids = _.random(0, 12)
-grandfather.role = "grandfather"
+let father = character("male", undefined)
+father.numberOfKids = _.random(0, 12)
+father.role = "father"
 
-let grandmother = character("female", grandfather.name.last)
-grandmother.numberOfKids = grandfather.numberOfKids
-grandmother.role = "grandmother"
+let surname = father.fullname.last
 
+let mother = character("female", surname)
 
-family.push(grandmother, grandfather)
+mother.numberOfKids = father.numberOfKids
+mother.role = "mother"
 
-//second generation
+family.push(father, mother)
 
-for (var i=0; i<grandmother.numberOfKids; i++) {
-	let child = character(undefined, grandfather.name.last)
+for (var i = 1; i <= mother.numberOfKids; i++) {
+	let child = character(undefined, surname)
 	child.role = "child"
 	family.push(child)
 }
-
-_.forEach(family, function(member) {
-	if (member.role === "child") {
-		member.numberOfKids = _.random(0, 12)
-	}
-})
 
 console.log(family)
