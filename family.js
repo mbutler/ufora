@@ -1,25 +1,42 @@
 let _ = require('lodash')
 let character = require('./character.js')
 
-let family = []
+function getFamily (name) {
+	let family = []
 
-let father = character("male", undefined)
-father.numberOfKids = _.random(0, 12)
-father.role = "father"
+	if (name === undefined) {
+		var father = character("male", undefined)
+	} else {
+		var father = character("male", name)
+	}
 
-let surname = father.fullname.last
+	
+	father.numberOfKids = _.random(0, 12)
+	father.role = "father"
 
-let mother = character("female", surname)
+	let surname = father.fullname.last
 
-mother.numberOfKids = father.numberOfKids
-mother.role = "mother"
+	let mother = character("female", surname)
 
-family.push(father, mother)
+	mother.numberOfKids = father.numberOfKids
+	mother.role = "mother"
 
-for (var i = 1; i <= mother.numberOfKids; i++) {
-	let child = character(undefined, surname)
-	child.role = "child"
-	family.push(child)
+	father.spouse = mother.fullname.first + " " + mother.fullname.last
+	mother.spouse = father.fullname.first + " " + father.fullname.last
+
+	family.push(father, mother)
+
+	for (var i = 1; i <= mother.numberOfKids; i++) {
+		let child = character(undefined, surname)
+		child.role = "child"
+		child.father = father.fullname.first + " " + father.fullname.last 
+		child.mother = mother.fullname.first + " " + mother.fullname.last
+		family.push(child)
+	}
+
+	return family
+
 }
 
-console.log(family)
+ 
+module.exports = getFamily

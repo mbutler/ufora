@@ -36,6 +36,7 @@ function getCharacter(gender, lastName) {
     character.wisMod = mod(character.wisdom)
     character.chaMod = mod(character.charisma)
     character.hp = dice.d8() + character.conMod
+    character.family = []
     //character.weapon = _.sample(weapons)
 
     return character
