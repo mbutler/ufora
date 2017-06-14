@@ -10,16 +10,15 @@ function getFamily (name) {
 		var father = character("male", name)
 	}
 
-	
-	father.numberOfKids = _.random(0, 12)
-	father.role = "father"
-
 	let surname = father.fullname.last
-
 	let mother = character("female", surname)
 
-	mother.numberOfKids = father.numberOfKids
+	mother.numberOfKids = _.round(_.random(4, 8) * 0.75) // fertility rate and mortality rate
 	mother.role = "mother"
+	
+	father.numberOfKids = mother.numberOfKids
+	father.role = "father"
+
 
 	father.spouse = mother.fullname.first + " " + mother.fullname.last
 	mother.spouse = father.fullname.first + " " + father.fullname.last
