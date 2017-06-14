@@ -2,14 +2,6 @@ let _ = require('lodash')
 let character = require('./character.js')
 let family = require('./family.js')
 
-let kin = []
-
-let firstGeneration = family()
-let greatgrandfather = _.find(firstGeneration, ["role", "father"])
-let surname = greatgrandfather.fullname.last
-
-marriage(firstGeneration)
-
 function marriage(generation) {
 	_.forEach(generation, function(familyMember) {
 		if (familyMember.gender === "female" && familyMember.role === "child" && isMarried() === true ) {
@@ -30,6 +22,8 @@ function marriage(generation) {
 			generation.push(wife)
 		}
 	})
+
+	return generation
 }
 
 function isMarried() {
@@ -42,7 +36,69 @@ function isMarried() {
 	}
 }
 
-kin.push(firstGeneration)
+function nextGen(generation) {
+	let secondGeneration = []
 
-//console.log(firstGeneration)
-console.log(JSON.stringify(kin))
+	_.forEach(generation, function(familyMember) {
+		if (familyMember.role === "child" && familyMember.spouse !== undefined) {
+			let surname = familyMember.fullname.lastname
+
+			let fam = []
+
+			if (familyMember.gender === "female") {
+				familyMember.role = "mother"
+				secondGeneration.push(familyMember)
+				fam = family(familyMember.spouse, familyMember.fullname.first + " " + familyMember.fullname.last)
+			} else if (familyMember.gender === "male") {
+				familyMember.role = "father"
+				secondGeneration.push(familyMember)
+				fam = family(familyMember.fullname.first + " " + familyMember.fullname.last, familyMember.spouse)
+			}
+
+			_.forEach(fam, function(member) {
+				secondGeneration.push(member)
+			})		
+		} else if (familyMember.role === "child") {
+			if (familyMember.gender === "male") {
+				familyMember.role = "uncle"
+			} else if (familyMember.gender === "female") {
+				familyMember.role = "aunt"
+			}
+
+			secondGeneration.push(familyMember)
+		} else {
+			secondGeneration.push(familyMember)
+		}
+	})
+
+	//marriage(secondGeneration)
+
+	return secondGeneration
+}
+
+function getKin() {
+	let kin = []
+
+	let grandfather = character("male", undefined)
+	let surname = grandfather.fullname.last
+	let grandmother = character("female", undefined)
+
+	grandmother.maidenName = grandmother.fullname.last
+	grandmother.fullname.last = surname
+
+	grandfather.role = "grandfather"
+	grandmother.role = "grandmother"
+	grandfather.spouse = grandmother.fullname.first + " " + grandmother.fullname.last
+	grandmother.spouse = grandfather.fullname.first + " " + grandfather.fullname.last
+
+	let firstGeneration = family(grandfather.fullname.first + " " + grandfather.fullname.last, grandmother.fullname.first + " " + grandmother.fullname.last)
+
+	let firstGenMarried = marriage(firstGeneration)
+	firstGenMarried.push(grandmother, grandfather)
+
+	let secondGeneration = nextGen(firstGenMarried)
+
+	return secondGeneration
+}
+
+module.exports = getKin
