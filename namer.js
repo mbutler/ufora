@@ -21139,11 +21139,7 @@ function getName (gender, lastName) {
     name.first = _.sample(female)
   }
 
-  if (lastName === undefined) {
-    name.last = _.sample(surname)
-  } else {
-    name.last = lastName
-  }
+  name.last = lastName || _.sample(surname)
 
   return name
 }

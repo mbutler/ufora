@@ -6,11 +6,7 @@ let jobs = require('./jobs.js')
 function getCharacter (gender, lastName) {
   let character = {}
 
-  if (gender === undefined) {
-    character.gender = _.sample(['male', 'female'])
-  } else {
-    character.gender = gender
-  }
+  character.gender = gender || _.sample(['male', 'female'])
 
   let fullname = getName(character.gender, lastName)
 

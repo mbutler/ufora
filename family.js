@@ -4,8 +4,10 @@ let character = require('./character.js')
 function getFamily (fatherName, motherName) {
   let family = []
 
-  let surname = _.split(fatherName, ' ')
-  surname = surname[1]
+  fatherName = "Marcus Van Der Boek"
+
+  //splits a name into an array of words, drops the first element, then joins them back into a string
+  let surname = _(fatherName).words().drop().join(' ')
 
   let numberOfKids = _.round(_.random(4, 8) * 0.75) // fertility rate and mortality rate
 
