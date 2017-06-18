@@ -1,5 +1,5 @@
 let _ = require('lodash')
-let getName = require('./namer.js')
+let namer = require('./namer.js')
 let dice = require('./dice.js')
 let jobs = require('./jobs.js')
 
@@ -8,7 +8,7 @@ function getCharacter (gender, lastName) {
 
   character.gender = gender || _.sample(['male', 'female'])
 
-  let fullname = getName(character.gender, lastName)
+  let fullname = namer.getPersonName(character.gender, lastName)
 
   character.fullname = fullname
 
@@ -32,9 +32,7 @@ function getCharacter (gender, lastName) {
   character.wisMod = mod(character.wisdom)
   character.chaMod = mod(character.charisma)
   character.hp = dice.d8() + character.conMod
-  character.family = []
-  // character.weapon = _.sample(weapons)
-
+  
   return character
 }
 

@@ -1,9 +1,11 @@
 let _ = require('lodash')
-let getName = require('./namer.js')
-let dice = require('./dice.js')
-let jobs = require('./jobs.js')
-let character = require('./character.js')
+let fs = require('fs')
+let getVillage = require('./village.js')
 
-console.log(character("male"))
+let village = getVillage(1)
+let villageName = _.kebabCase(village.demographics.name)
 
-//console.log(getName("male", "Butler"))
+fs.writeFile(villageName, JSON.stringify(village, null, 4), function (err) {
+	if (err) return console.log(err)
+	console.log(villageName + " has been generated")
+})

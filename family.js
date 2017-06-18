@@ -4,8 +4,6 @@ let character = require('./character.js')
 function getFamily (fatherName, motherName) {
   let family = []
 
-  fatherName = "Marcus Van Der Boek"
-
   //splits a name into an array of words, drops the first element, then joins them back into a string
   let surname = _(fatherName).words().drop().join(' ')
 

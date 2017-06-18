@@ -1,15 +1,31 @@
 let dice = require('./dice.js')
 let kin = require('./kin.js')
+let namer = require('./namer.js')
 let _ = require('lodash')
 
-let village = []
+function getVillage (numOfkin) {
+	let village = []
+	let population = 0
 
-let numberOfKin = _.random(5, 30)
-//let numberOfKin = 1
+	let villageName = namer.getTownName()
 
-for (var i = 0; i < numberOfKin; i++) {
-  let newFam = kin()
-  village.push(newFam)
+	let numberOfKin = numOfkin || _.random(5, 30)
+
+	for (var i = 0; i < numberOfKin; i++) {
+	  let newFam = kin()
+	  village.push(newFam)
+	}
+
+	_.forEach(village, function(kin) {
+		_.forEach(kin, function(member) {
+			population++
+		})
+	})
+
+	village.push({ "VillageName": villageName, "population": population })
+	village.demographics = { "name": villageName, "population": population }
+
+	return village
 }
 
-console.log(JSON.stringify(village))
+module.exports = getVillage
