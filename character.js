@@ -2,6 +2,7 @@ let _ = require('lodash')
 let namer = require('./namer.js')
 let dice = require('./dice.js')
 let jobs = require('./jobs.js')
+let description = require('./description.js')
 
 function getCharacter (gender, lastName) {
   let character = {}
@@ -18,7 +19,7 @@ function getCharacter (gender, lastName) {
   }
 
   character.job = jobs.getJob()
-
+  character.description = description()
   character.strength = dice.ability()
   character.dexterity = dice.ability()
   character.constitution = dice.ability()
