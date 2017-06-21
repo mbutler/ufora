@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "pdfkit": "^0.8.2",
     "tracery-grammar": "^2.7.3"
   }
 }
