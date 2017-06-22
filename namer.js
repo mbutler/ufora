@@ -1,6 +1,7 @@
 let _ = require('lodash')
 
 let village = [
+	"Ufora",
 	"Hogsfeet",
 	"Tamworth",
 	"Tywardreath",
