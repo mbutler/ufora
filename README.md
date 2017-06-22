@@ -1,7 +1,7 @@
 # ufora
 Generating a population of commoners.
 
-This application generates approximately 200-800 D&D commoners complete with names and stat blocks in a single village. The entire village is output as a PDF. To generate a new village, simply run `node app` in the project directory.
+This application generates approximately 200-800 D&D commoners complete with names and stat blocks in a single village. The entire village is output as PDF and JSON files. To generate a new village, simply run `node app` in the project directory.
 
 `app.js` - Generates a new village and outputs a single PDF page per commoner.
 
