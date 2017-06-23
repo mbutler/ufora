@@ -4,8 +4,8 @@ let getVillage = require('./village.js')
 let character = require('./character.js')
 let PDFDocument = require('pdfkit')
 
-var nameWidth, nameHeight
-let village = getVillage()
+//user may pass in number of kin. Keep to about 150 or else run out of memory
+let village = getVillage(process.argv[2])
 let villageName = _.kebabCase(village.demographics.name)
 let villagePop = _.find(village, function(o) { return o.population })
 
@@ -17,6 +17,7 @@ const doc = new PDFDocument({
 
 doc.pipe(fs.createWriteStream('./' + _.snakeCase(villageName) + '.pdf'))
 
+//title page
 doc.moveDown()
     .moveDown()
     .moveDown()
@@ -105,23 +106,23 @@ function createStatBlock(commoner) {
     doc.font('./fonts/noto-sans-bold.ttf')
         .text('STR: ', { continued: true })
         .font('./fonts/noto-sans-regular.ttf')
-        .text(commoner.strength + '(' + _.toString(commoner.strMod) + ')  ', { continued: true })
+        .text(commoner.strength + '(' + _.toString(commoner.strMod) + ')  ',{ continued: true })
         .font('./fonts/noto-sans-bold.ttf')
         .text('DEX: ', { continued: true })
         .font('./fonts/noto-sans-regular.ttf')
-        .text(commoner.dexterity + '(' + commoner.dexMod + ')  ', { continued: true })
+        .text(commoner.dexterity + '(' + commoner.dexMod + ')  ',{ continued: true })
         .font('./fonts/noto-sans-bold.ttf')
         .text('CON: ', { continued: true })
         .font('./fonts/noto-sans-regular.ttf')
-        .text(commoner.constitution + '(' + commoner.conMod + ')  ', { continued: true })
+        .text(commoner.constitution + '(' + commoner.conMod + ')  ',{ continued: true })
         .font('./fonts/noto-sans-bold.ttf')
         .text('INT: ', { continued: true })
         .font('./fonts/noto-sans-regular.ttf')
-        .text(commoner.intelligence + '(' + commoner.intMod + ')  ', { continued: true })
+        .text(commoner.intelligence + '(' + commoner.intMod + ')  ',{ continued: true })
         .font('./fonts/noto-sans-bold.ttf')
         .text('WIS: ', { continued: true })
         .font('./fonts/noto-sans-regular.ttf')
-        .text(commoner.wisdom + '(' + commoner.wisMod + ')  ', { continued: true })
+        .text(commoner.wisdom + '(' + commoner.wisMod + ')  ',{ continued: true })
         .font('./fonts/noto-sans-bold.ttf')
         .text('CHA: ', { continued: true })
         .font('./fonts/noto-sans-regular.ttf')
