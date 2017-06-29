@@ -4,6 +4,43 @@ let dice = require('./dice.js')
 let jobs = require('./jobs.js')
 let description = require('./description.js')
 
+var weapons = [
+    { name: 'club', damage: '1d4 bludgeoning' },
+    { name: 'club', damage: '1d4 bludgeoning' },
+    { name: 'club', damage: '1d4 bludgeoning' },
+    { name: 'club', damage: '1d4 bludgeoning' },
+    { name: 'club', damage: '1d4 bludgeoning' },
+    { name: 'club', damage: '1d4 bludgeoning' },
+    { name: 'club', damage: '1d4 bludgeoning' },
+    { name: 'club', damage: '1d4 bludgeoning' },
+    { name: 'dagger', damage: '1d4 piercing' },
+    { name: 'handaxe', damage: '1d6 slashing' },
+    { name: 'handaxe', damage: '1d6 slashing' },
+    { name: 'handaxe', damage: '1d6 slashing' },
+    { name: 'handaxe', damage: '1d6 slashing' },
+    { name: 'handaxe', damage: '1d6 slashing' },
+    { name: 'hammer', damage: '1d4 bludgeoning' },
+    { name: 'hammer', damage: '1d4 bludgeoning' },
+    { name: 'hammer', damage: '1d4 bludgeoning' },
+    { name: 'hammer', damage: '1d4 bludgeoning' },
+    { name: 'hammer', damage: '1d4 bludgeoning' },
+    { name: 'hammer', damage: '1d4 bludgeoning' },
+    { name: 'sickle', damage: '1d4 slashing' },
+    { name: 'sickle', damage: '1d4 slashing' },
+    { name: 'sickle', damage: '1d4 slashing' },
+    { name: 'sickle', damage: '1d4 slashing' },
+    { name: 'sickle', damage: '1d4 slashing' },
+    { name: 'sickle', damage: '1d4 slashing' },
+    { name: 'sickle', damage: '1d4 slashing' },
+    { name: 'shortbow', damage: '1d6 piercing' },
+    { name: 'shortbow', damage: '1d6 piercing' },
+    { name: 'shortbow', damage: '1d6 piercing' },
+    { name: 'shortbow', damage: '1d6 piercing' },
+    { name: 'net', damage: 'thrown' },
+    { name: 'net', damage: 'thrown' },
+    { name: 'shortsword', damage: '1d6 piercing' }
+]
+
 function getCharacter(gender, lastName) {
     let character = {}
 
@@ -39,6 +76,7 @@ function getCharacter(gender, lastName) {
     character.chaMod = mod(character.charisma)
     character.hp = dice.d8() + Math.floor((character.constitution - 10) / 2)
     character.ac = 10 + Math.floor((character.dexterity - 10) / 2)
+    character.weapon = _.sample(weapons)
 
     return character
 }
