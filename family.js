@@ -11,6 +11,7 @@ function getFamily(fatherName, motherName) {
 
     for (var i = 1; i <= numberOfKids; i++) {
         let child = character(undefined, surname)
+        //child.weapon = { name: 'toy', damage: 'none' }
         child.role = 'child'
         child.father = fatherName
         child.mother = motherName
