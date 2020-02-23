@@ -175,7 +175,7 @@ _.forEach(village, function(kin) {
 
 doc.end()
 
-fs.writeFile(villageName, JSON.stringify(village, null, 4), function(err) {
+fs.writeFile(villageName + '.json', JSON.stringify(village, null, 4), function(err) {
     if (err) return console.log(err)
     console.log(_.capitalize(villageName) + " has been generated")
 })
