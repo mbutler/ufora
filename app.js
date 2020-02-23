@@ -66,7 +66,6 @@ function createStatBlock(commoner) {
 
     // rect(x, y, width, height)
     doc.rect(27, 27, 558, 36)
-        .fillOpacity(0.2)
         .fill('#e5bd80')
         .fontSize(36)
         .fill('red')
