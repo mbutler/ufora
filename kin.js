@@ -88,6 +88,7 @@ function nextGen(generation) {
 
 function getKin() {
     let grandfather = character('male', undefined)
+    //change this if you want to randomize who gets surname or make matriarchal
     let surname = grandfather.fullname.last
     let grandmother = character('female', undefined)
 
@@ -99,15 +100,15 @@ function getKin() {
     grandfather.spouse = grandmother.fullname.first + ' ' + grandmother.fullname.last
     grandmother.spouse = grandfather.fullname.first + ' ' + grandfather.fullname.last
 
-    grandfather.dad = character('male', surname)
-    grandfather.mom = character('female', surname)
-    grandfather.father = grandfather.dad.fullname.first + ' ' + grandfather.dad.fullname.last
-    grandfather.mother = grandfather.mom.fullname.first + ' ' + grandfather.mom.fullname.last
+    let grandfathersDad = character('male', surname)
+    let grandfathersMom = character('female', surname)
+    grandfather.father = grandfathersDad.fullname.first + ' ' + grandfathersDad.fullname.last
+    grandfather.mother = grandfathersMom.fullname.first + ' ' + grandfathersMom.fullname.last
 
-    grandmother.dad = character('male', grandmother.maidenName)
-    grandmother.mom = character('female', grandmother.maidenName)
-    grandmother.father = grandmother.dad.fullname.first + ' ' + grandmother.dad.fullname.last
-    grandmother.mother = grandmother.mom.fullname.first + ' ' + grandmother.mom.fullname.last
+    let grandmothersDad = character('male', grandmother.maidenName)
+    let grandmothersMom = character('female', grandmother.maidenName)
+    grandmother.father = grandmothersDad.fullname.first + ' ' + grandmothersDad.fullname.last
+    grandmother.mother = grandmothersMom.fullname.first + ' ' + grandmothersMom.fullname.last
 
     grandfather.age = _.random(60, 80)
     grandmother.age = _.random(60, 80)
